@@ -1,0 +1,16 @@
+{
+  "name": "wt-prod-k8m3",
+  "version": "1.0.0",
+  "description": "天气项目后端代码",
+  "keywords": [
+    "weather",
+    "backend",
+    "nodejs",
+    "typescript",
+    "cloudflare"
+  ],
+  "author": "chauncey",
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
