@@ -24,7 +24,7 @@ export function createSuccessResponse(
   data: any,
   additionalHeaders?: Record<string, string>
 ): Response {
-  return new Response(JSON.stringify(data), {
+  return new Response(data, {
     status: 200,
     headers: {
       ...JSON_HEADERS,
