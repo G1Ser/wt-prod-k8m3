@@ -4,21 +4,16 @@
 
 ```
 src/
-├── index.ts                    # 主入口文件，Worker 的 fetch 处理器
 ├── config/
-│   ├── constants.ts           # 常量配置（缓存时间等）
-│   ├── routes.ts              # 路由映射配置
-│   └── providers.ts           # API 提供商的基础配置（URL、key等）
+│   ├── constants.ts           # 所有常量配置（缓存时间、路由映射、CORS等）
+│   └── providers.ts           # API 提供商的基础配置（URL、默认参数等）
 ├── handlers/
-│   ├── index.ts               # 导出所有处理器
-│   ├── ip.ts                  # IP 定位处理函数
-│   ├── geocode.ts             # 地理编码处理函数
-│   └── weather.ts             # 天气查询处理函数
+│   └── index.ts               # 所有请求处理器（IP定位、地理编码、天气查询）
 ├── providers/                  # API 提供商调用
 │   ├── amap.ts                # 高德地图 API 调用
-│   ├── baidu.ts               # 百度地图 API 调用
-│   ├── qweather.ts            # 和风天气 API 调用
-│   └── openweather.ts         # OpenWeather API 调用
+│   ├── baidu.ts               # 百度地图 API 调用（计划）
+│   ├── qweather.ts            # 和风天气 API 调用（计划）
+│   └── openweather.ts         # OpenWeather API 调用（计划）
 ├── utils/
 │   ├── cors.ts                # CORS 处理工具
 │   ├── cache.ts               # 缓存工具函数
@@ -32,16 +27,18 @@ src/
 
 #### 1. **config/** - 配置管理
 
-- **constants.ts**: 存放缓存时间、CORS 白名单等常量配置
-- **routes.ts**: 路由映射配置，方便添加新的 API 路由
+- **constants.ts**: 存放所有常量配置，包括：
+  - 缓存时间配置 `CACHE_TTL`
+  - 路由映射 `API_MAP = { '/geocode/geo': handleGeocodeQuery, ... }`
+  - CORS 白名单等
 - **providers.ts**: 各个 API 提供商的基础信息（URL、默认参数等）
 
 #### 2. **handlers/** - 请求处理层
 
-- **ip.ts**: 处理 IP 定位请求，包括参数验证、缓存检查、调用对应的 provider
-- **geocode.ts**: 处理地理编码请求
-- **weather.ts**: 处理天气查询请求
-- **index.ts**: 统一导出所有处理器
+- **index.ts**: 包含所有处理函数
+  - `handleIpQuery` - IP 定位处理
+  - `handleGeocodeQuery` - 地理编码处理
+  - `handleWeatherQuery` - 天气查询处理
 
 #### 3. **providers/** - API 调用层
 

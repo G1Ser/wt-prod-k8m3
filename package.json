@@ -2,6 +2,8 @@
   "name": "wt-prod-k8m3",
   "version": "1.0.0",
   "description": "天气项目后端代码",
+  "main": "src/index.ts",
+  "type": "module",
   "keywords": [
     "weather",
     "backend",
@@ -10,7 +12,11 @@
     "cloudflare"
   ],
   "author": "chauncey",
+  "scripts": {
+    "build": "tsc"
+  },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20251121.0",
     "typescript": "^5.9.3",
     "wrangler": "^4.50.0"
   }
