@@ -3,5 +3,10 @@ const MINUTE = 60;
 const HOUR = 60 * MINUTE;
 const DAY = 24 * HOUR;
 // CORS 白名单
-const CORS_ORIGINS = ["https://weatherv1.chauncey.work"];
+const CORS_ORIGINS = [
+  "https://weatherv1.chauncey.work",
+  "https://weatherv2.chauncey.work",
+  "https://weatherv3.chauncey.work",
+  "https://weatherv4.chauncey.work",
+];
 export { MINUTE, HOUR, DAY, CORS_ORIGINS };
