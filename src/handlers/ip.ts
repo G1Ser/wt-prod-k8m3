@@ -21,7 +21,7 @@ export const handleIPQuery = async (
       "Cache-Control": `public, max-age=${cacheTtl.browser}`,
     });
   }
-  const response = await fetch(`${IP_BASE_URL}?lang=${lang}`);
+  const response = await fetch(`${IP_BASE_URL}?lang=${lang}&ip=${IP}`);
   const data = await response.text();
   // 存储进缓存
   await env.CACHE.put(cacheKey, data, {
