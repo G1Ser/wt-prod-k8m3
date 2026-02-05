@@ -1,6 +1,5 @@
 import { Env } from "@/types/env";
-import { BMAP_BASE_URL } from "@/config/providers/bmap";
-import { API_CACHE_TTL } from "@/config/router";
+import { BMAP_BASE_URL, BMAP_CACHE_TTL } from "@/config/providers/bmap";
 import { createErrorResponse, createSuccessResponse } from "@/utils/response";
 import { getCORSHeaders } from "@/utils/cors";
 export const handleWeatherQuery = async (
@@ -22,8 +21,8 @@ export const handleWeatherQuery = async (
       400,
     );
   }
-  const cacheKey = `weather/baidu:${lon}:${lat}`;
-  const cacheTtl = API_CACHE_TTL.WEATHER;
+  const cacheKey = `bmap_weather:${lon}:${lat}`;
+  const cacheTtl = BMAP_CACHE_TTL.WEATHER;
   // 检查是否有缓存
   const cacheData = await env.CACHE.get(cacheKey);
   if (cacheData) {

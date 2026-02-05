@@ -2,8 +2,8 @@ import { MINUTE, DAY } from "../constants";
 import { handleGeocodeQuery, handleWeatherQuery } from "@/handlers/amap";
 const AMAP_BASE_URL = "https://restapi.amap.com/v3";
 const AMAP_ROUTES_MAP = {
-  "/geocode/geo": handleGeocodeQuery,
-  "/weather/weatherInfo": handleWeatherQuery,
+  "/amap/geocode": handleGeocodeQuery,
+  "/amap/weather": handleWeatherQuery,
 };
 const AMAP_CACHE_TTL = {
   GEOCODE: {

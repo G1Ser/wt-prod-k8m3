@@ -1,18 +1,17 @@
 import type { Env } from "@/types/env";
-import { IP_BASE_URL } from "@/config/providers/ip";
-import { API_CACHE_TTL } from "@/config/router";
+import { IP_BASE_URL, IP_CACHE_TTL } from "@/config/providers/ip";
 import { createSuccessResponse } from "@/utils/response";
 import { getCORSHeaders } from "@/utils/cors";
 export const handleIPQuery = async (
   request: Request,
   env: Env,
-  origin: string
+  origin: string,
 ) => {
   const IP = request.headers.get("CF-Connecting-IP");
   const url = new URL(request.url);
   const lang = url.searchParams.get("lang") || "zh-CN";
   const cacheKey = `ip:${IP}:${lang}`;
-  const cacheTtl = API_CACHE_TTL.IP;
+  const cacheTtl = IP_CACHE_TTL.IP;
   // 检查是否有缓存
   const cacheData = await env.CACHE.get(cacheKey);
   if (cacheData) {
