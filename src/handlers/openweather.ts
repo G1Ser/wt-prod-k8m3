@@ -142,22 +142,24 @@ export const handleWeatherMapQuery = async (
     env: Env,
     origin: string,
 ) => {
-    const urlPath = new URL(request.url).pathname;
-    const pathMatch = urlPath.match(/\/map\/([^\/]+)\/(\d+)\/(\d+)\/(\d+)\.png/);
+    const url = new URL(request.url);
+    const layer = url.searchParams.get("layer");
+    const x = url.searchParams.get("x");
+    const y = url.searchParams.get("y");
+    const z = url.searchParams.get("z");
     if (!env.OPENWEATHER_KEY) {
         return createErrorResponse(
             "Configuration Error",
             "OPENWEATHER_KEY is not set",
         )
     }
-    if (!pathMatch) {
+    if (!layer || !x || !y || !z) {
         return createErrorResponse(
             "Invalid URL",
             "Invalid map tile URL format.",
             400
         )
     }
-    const [, layer, z, x, y] = pathMatch;
     const cacheKey = `openweather_map:${layer}:${z}:${x}:${y}`;
     const cacheTtl = OPENWEATHER_CACHE_TTL.MAP;
     // 检查是否有缓存
