@@ -7,6 +7,7 @@ export interface Env {
   AMAP_KEY: string;
   BMAP_KEY: string;
   QWEATHER_KEY: string;
+  OPENWEATHER_KEY: string;
   // Cloudflare KV 存储
   CACHE: KVNamespace;
 }
