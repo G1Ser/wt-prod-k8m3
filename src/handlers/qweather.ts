@@ -54,7 +54,7 @@ export const handleWeatherNowQuery = async (
     });
   }
   const response = await fetch(
-    `${QWEATHER_BASE_URL}/v7/weather/now?location=${lon},${lat}&key=${env.QWEATHER_KEY}&lang=${lang}$unit=${unit}`,
+    `${QWEATHER_BASE_URL}/v7/weather/now?location=${lon},${lat}&key=${env.QWEATHER_KEY}&lang=${lang}&unit=${unit}`,
   );
   const data = await response.text();
   await env.CACHE.put(cacheKey, data, {
@@ -90,7 +90,7 @@ const handleWeatherForecastQuery = async (
     });
   }
   const response = await fetch(
-    `${QWEATHER_BASE_URL}/v7/weather/${query}?location=${lon},${lat}&key=${env.QWEATHER_KEY}&lang=${lang}$unit=${unit}`,
+    `${QWEATHER_BASE_URL}/v7/weather/${query}?location=${lon},${lat}&key=${env.QWEATHER_KEY}&lang=${lang}&unit=${unit}`,
   );
   const data = await response.text();
   await env.CACHE.put(cacheKey, data, {
@@ -145,7 +145,7 @@ export const handleWeatherIndiceQuery = async (
     });
   }
   const response = await fetch(
-    `${QWEATHER_BASE_URL}/v7/indices/1d?location=${lon},${lat}&key=${env.QWEATHER_KEY}&lang=${lang}$type=0`,
+    `${QWEATHER_BASE_URL}/v7/indices/1d?location=${lon},${lat}&key=${env.QWEATHER_KEY}&lang=${lang}&type=0`,
   );
   const data = await response.text();
   await env.CACHE.put(cacheKey, data, {
@@ -190,7 +190,7 @@ export const handleWeatherAstronomyQuery = async (
     });
   }
   const response = await fetch(
-    `${QWEATHER_BASE_URL}/v7/astronomy/${astronomy}?location=${lon},${lat}&key=${env.QWEATHER_KEY}$date=${date}`,
+    `${QWEATHER_BASE_URL}/v7/astronomy/${astronomy}?location=${lon},${lat}&key=${env.QWEATHER_KEY}&date=${date}`,
   );
   const data = await response.text();
   await env.CACHE.put(cacheKey, data, {
