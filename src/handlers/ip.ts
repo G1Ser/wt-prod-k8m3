@@ -1,20 +1,24 @@
 import type { Env } from "@/types/env";
-import { IP_BASE_URL } from "@/config/providers/ip";
-import { createSuccessResponse } from "@/utils/response";
-import { getCORSHeaders } from "@/utils/cors";
+import { IP_BASE_URL, IP_CACHE_TTL } from "@/config/providers/ip";
+import { getResponseData } from "@/utils/cache";
 export const handleIPQuery = async (
   request: Request,
   env: Env,
   origin: string,
 ) => {
-  const IP =
+  const real_ip =
     request.headers.get("CF-Connecting-IP") ||
-    request.headers.get("X-Forwarded-For");
+    request.headers.get("X-Forwarded-For") ||
+    "";
   const url = new URL(request.url);
   const lang = url.searchParams.get("lang") || "zh-CN";
-  const response = await fetch(`${IP_BASE_URL}?lang=${lang}&ip=${IP}`);
-  const data = await response.text();
-  return createSuccessResponse(data, {
-    ...getCORSHeaders(origin),
-  });
+  const cacheKey = `ip:${real_ip}:${lang}`;
+  const cacheTtl = IP_CACHE_TTL.IP;
+  return getResponseData(
+    env,
+    cacheKey,
+    cacheTtl,
+    () => fetch(`${IP_BASE_URL}/${real_ip}?lang=${lang}`),
+    origin,
+  );
 };
