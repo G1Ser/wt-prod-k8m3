@@ -7,7 +7,9 @@ export const handleIPQuery = async (
   env: Env,
   origin: string,
 ) => {
-  const IP = request.headers.get("CF-Connecting-IP");
+  const IP =
+    request.headers.get("CF-Connecting-IP") ||
+    request.headers.get("X-Forwarded-For");
   const url = new URL(request.url);
   const lang = url.searchParams.get("lang") || "zh-CN";
   const response = await fetch(`${IP_BASE_URL}?lang=${lang}&ip=${IP}`);
