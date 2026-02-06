@@ -3,8 +3,8 @@ import {
   QWEATHER_BASE_URL,
   QWEATHER_CACHE_TTL,
 } from "@/config/providers/qweather";
-import { createErrorResponse, createSuccessResponse } from "@/utils/response";
-import { getCORSHeaders } from "@/utils/cors";
+import { createErrorResponse } from "@/utils/response";
+import { getResponseData } from "@/utils/cache";
 const validateQWeatherParams = (request: Request, env: Env) => {
   if (!env.QWEATHER_KEY) {
     return {
@@ -44,27 +44,16 @@ export const handleWeatherNowQuery = async (
   const { lon, lat, lang, unit } = validation.data!;
   const cacheKey = `qweather_now:${lon}:${lat}:${lang}:${unit}`;
   const cacheTtl = QWEATHER_CACHE_TTL.NOW;
-  // 检查是否有缓存
-  const cacheData = await env.CACHE.get(cacheKey);
-  if (cacheData) {
-    return createSuccessResponse(cacheData, {
-      ...getCORSHeaders(origin),
-      "X-Cache": "HIT",
-      "Cache-Control": `public, max-age=${cacheTtl.browser}`,
-    });
-  }
-  const response = await fetch(
-    `${QWEATHER_BASE_URL}/v7/weather/now?location=${lon},${lat}&key=${env.QWEATHER_KEY}&lang=${lang}&unit=${unit}`,
+  return getResponseData(
+    env,
+    cacheKey,
+    cacheTtl,
+    () =>
+      fetch(
+        `${QWEATHER_BASE_URL}/v7/weather/now?location=${lon},${lat}&key=${env.QWEATHER_KEY}&lang=${lang}&unit=${unit}`,
+      ),
+    origin,
   );
-  const data = await response.text();
-  await env.CACHE.put(cacheKey, data, {
-    expirationTtl: cacheTtl.kv,
-  });
-  return createSuccessResponse(data, {
-    ...getCORSHeaders(origin),
-    "X-Cache": "MISS",
-    "Cache-Control": `public, max-age=${cacheTtl.browser}`,
-  });
 };
 
 const handleWeatherForecastQuery = async (
@@ -80,27 +69,16 @@ const handleWeatherForecastQuery = async (
   const { lon, lat, lang, unit } = validation.data!;
   const cacheKey = `qweather_forecast:${query}:${lon}:${lat}:${lang}:${unit}`;
   const cacheTtl = QWEATHER_CACHE_TTL.FORECAST;
-  // 检查是否有缓存
-  const cacheData = await env.CACHE.get(cacheKey);
-  if (cacheData) {
-    return createSuccessResponse(cacheData, {
-      ...getCORSHeaders(origin),
-      "X-Cache": "HIT",
-      "Cache-Control": `public, max-age=${cacheTtl.browser}`,
-    });
-  }
-  const response = await fetch(
-    `${QWEATHER_BASE_URL}/v7/weather/${query}?location=${lon},${lat}&key=${env.QWEATHER_KEY}&lang=${lang}&unit=${unit}`,
+  return getResponseData(
+    env,
+    cacheKey,
+    cacheTtl,
+    () =>
+      fetch(
+        `${QWEATHER_BASE_URL}/v7/weather/${query}?location=${lon},${lat}&key=${env.QWEATHER_KEY}&lang=${lang}&unit=${unit}`,
+      ),
+    origin,
   );
-  const data = await response.text();
-  await env.CACHE.put(cacheKey, data, {
-    expirationTtl: cacheTtl.kv,
-  });
-  return createSuccessResponse(data, {
-    ...getCORSHeaders(origin),
-    "X-Cache": "MISS",
-    "Cache-Control": `public, max-age=${cacheTtl.browser}`,
-  });
 };
 
 export const handleWeatherDayQuery = async (
@@ -135,27 +113,16 @@ export const handleWeatherIndiceQuery = async (
   const { lon, lat, lang } = validation.data!;
   const cacheKey = `qweather_indice:${lon}:${lat}:${lang}`;
   const cacheTtl = QWEATHER_CACHE_TTL.INDICE;
-  // 检查是否有缓存
-  const cacheData = await env.CACHE.get(cacheKey);
-  if (cacheData) {
-    return createSuccessResponse(cacheData, {
-      ...getCORSHeaders(origin),
-      "X-Cache": "HIT",
-      "Cache-Control": `public, max-age=${cacheTtl.browser}`,
-    });
-  }
-  const response = await fetch(
-    `${QWEATHER_BASE_URL}/v7/indices/1d?location=${lon},${lat}&key=${env.QWEATHER_KEY}&lang=${lang}&type=0`,
+  return getResponseData(
+    env,
+    cacheKey,
+    cacheTtl,
+    () =>
+      fetch(
+        `${QWEATHER_BASE_URL}/v7/indices/1d?location=${lon},${lat}&key=${env.QWEATHER_KEY}&lang=${lang}&type=0`,
+      ),
+    origin,
   );
-  const data = await response.text();
-  await env.CACHE.put(cacheKey, data, {
-    expirationTtl: cacheTtl.kv,
-  });
-  return createSuccessResponse(data, {
-    ...getCORSHeaders(origin),
-    "X-Cache": "MISS",
-    "Cache-Control": `public, max-age=${cacheTtl.browser}`,
-  });
 };
 
 export const handleWeatherAstronomyQuery = async (
@@ -180,27 +147,16 @@ export const handleWeatherAstronomyQuery = async (
   }
   const cacheKey = `qweather_astronomy:${astronomy}:${lon}:${lat}`;
   const cacheTtl = QWEATHER_CACHE_TTL.ASTRONOMY;
-  // 检查是否有缓存
-  const cacheData = await env.CACHE.get(cacheKey);
-  if (cacheData) {
-    return createSuccessResponse(cacheData, {
-      ...getCORSHeaders(origin),
-      "X-Cache": "HIT",
-      "Cache-Control": `public, max-age=${cacheTtl.browser}`,
-    });
-  }
-  const response = await fetch(
-    `${QWEATHER_BASE_URL}/v7/astronomy/${astronomy}?location=${lon},${lat}&key=${env.QWEATHER_KEY}&date=${date}`,
+  return getResponseData(
+    env,
+    cacheKey,
+    cacheTtl,
+    () =>
+      fetch(
+        `${QWEATHER_BASE_URL}/v7/astronomy/${astronomy}?location=${lon},${lat}&key=${env.QWEATHER_KEY}&date=${date}`,
+      ),
+    origin,
   );
-  const data = await response.text();
-  await env.CACHE.put(cacheKey, data, {
-    expirationTtl: cacheTtl.kv,
-  });
-  return createSuccessResponse(data, {
-    ...getCORSHeaders(origin),
-    "X-Cache": "MISS",
-    "Cache-Control": `public, max-age=${cacheTtl.browser}`,
-  });
 };
 
 export const handleWeatherAlertQuery = async (
@@ -215,27 +171,16 @@ export const handleWeatherAlertQuery = async (
   const { lon, lat, lang } = validation.data!;
   const cacheKey = `qweather_alert:${lon}:${lat}:${lang}`;
   const cacheTtl = QWEATHER_CACHE_TTL.ALERT;
-  // 检查是否有缓存
-  const cacheData = await env.CACHE.get(cacheKey);
-  if (cacheData) {
-    return createSuccessResponse(cacheData, {
-      ...getCORSHeaders(origin),
-      "X-Cache": "HIT",
-      "Cache-Control": `public, max-age=${cacheTtl.browser}`,
-    });
-  }
-  const response = await fetch(
-    `${QWEATHER_BASE_URL}/weatheralert/v1/current/${lat}/${lon}?key=${env.QWEATHER_KEY}&lang=${lang}`,
+  return getResponseData(
+    env,
+    cacheKey,
+    cacheTtl,
+    () =>
+      fetch(
+        `${QWEATHER_BASE_URL}/weatheralert/v1/current/${lat}/${lon}?key=${env.QWEATHER_KEY}&lang=${lang}`,
+      ),
+    origin,
   );
-  const data = await response.text();
-  await env.CACHE.put(cacheKey, data, {
-    expirationTtl: cacheTtl.kv,
-  });
-  return createSuccessResponse(data, {
-    ...getCORSHeaders(origin),
-    "X-Cache": "MISS",
-    "Cache-Control": `public, max-age=${cacheTtl.browser}`,
-  });
 };
 
 export const handleWeatherAirQuery = async (
@@ -250,25 +195,14 @@ export const handleWeatherAirQuery = async (
   const { lon, lat, lang } = validation.data!;
   const cacheKey = `qweather_air:${lon}:${lat}:${lang}`;
   const cacheTtl = QWEATHER_CACHE_TTL.AIR;
-  // 检查是否有缓存
-  const cacheData = await env.CACHE.get(cacheKey);
-  if (cacheData) {
-    return createSuccessResponse(cacheData, {
-      ...getCORSHeaders(origin),
-      "X-Cache": "HIT",
-      "Cache-Control": `public, max-age=${cacheTtl.browser}`,
-    });
-  }
-  const response = await fetch(
-    `${QWEATHER_BASE_URL}/airquality/v1/current/${lat}/${lon}?key=${env.QWEATHER_KEY}&lang=${lang}`,
+  return getResponseData(
+    env,
+    cacheKey,
+    cacheTtl,
+    () =>
+      fetch(
+        `${QWEATHER_BASE_URL}/airquality/v1/current/${lat}/${lon}?key=${env.QWEATHER_KEY}&lang=${lang}`,
+      ),
+    origin,
   );
-  const data = await response.text();
-  await env.CACHE.put(cacheKey, data, {
-    expirationTtl: cacheTtl.kv,
-  });
-  return createSuccessResponse(data, {
-    ...getCORSHeaders(origin),
-    "X-Cache": "MISS",
-    "Cache-Control": `public, max-age=${cacheTtl.browser}`,
-  });
 };
