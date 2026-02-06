@@ -68,9 +68,7 @@ export const handleWeatherForecastQuery = async (
     return validation.error;
   }
   const { lon, lat, lang, units } = validation.data!;
-  const type = url.searchParams.get("type") || "daily";
-  const cnt = type === "daily" ? 7 : 24;
-  const cacheKey = `openweather_forecast:${lon}:${lat}:${type}:${lang}:${units}`;
+  const cacheKey = `openweather_forecast:${lon}:${lat}:${lang}:${units}`;
   const cacheTtl = OPENWEATHER_CACHE_TTL.FORECAST;
   return getResponseData(
     env,
@@ -78,7 +76,7 @@ export const handleWeatherForecastQuery = async (
     cacheTtl,
     () =>
       fetch(
-        `${OPENWEATHER_BASE_URL}/forecast/${type}?lon=${lon}&lat=${lat}&appid=${env.OPENWEATHER_KEY}&lang=${lang}&units=${units}&cnt=${cnt}`,
+        `${OPENWEATHER_BASE_URL}/forecast?lon=${lon}&lat=${lat}&appid=${env.OPENWEATHER_KEY}&lang=${lang}&units=${units}`,
       ),
     origin,
   );

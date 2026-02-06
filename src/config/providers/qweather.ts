@@ -1,8 +1,7 @@
 import { HOUR, DAY } from "../constants";
 import {
   handleWeatherNowQuery,
-  handleWeatherDayQuery,
-  handleWeatherHourQuery,
+  handleWeatherForecastQuery,
   handleWeatherIndiceQuery,
   handleWeatherAstronomyQuery,
   handleWeatherAlertQuery,
@@ -11,8 +10,7 @@ import {
 const QWEATHER_BASE_URL = "https://kp54e4p9fp.re.qweatherapi.com";
 const QWEATHER_ROUTES_MAP = {
   "/qweather/now": handleWeatherNowQuery,
-  "/qweather/day": handleWeatherDayQuery,
-  "/qweather/hour": handleWeatherHourQuery,
+  "/qweather/forecast": handleWeatherForecastQuery,
   "/qweather/indice": handleWeatherIndiceQuery,
   "/qweather/astronomy": handleWeatherAstronomyQuery,
   "/qweather/alert": handleWeatherAlertQuery,

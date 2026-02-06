@@ -56,18 +56,19 @@ export const handleWeatherNowQuery = async (
   );
 };
 
-const handleWeatherForecastQuery = async (
+export const handleWeatherForecastQuery = async (
   request: Request,
   env: Env,
   origin: string,
-  query: string,
 ) => {
+  const url = new URL(request.url);
   const validation = validateQWeatherParams(request, env);
   if (!validation.success) {
     return validation.error;
   }
   const { lon, lat, lang, unit } = validation.data!;
-  const cacheKey = `qweather_forecast:${query}:${lon}:${lat}:${lang}:${unit}`;
+  const period = url.searchParams.get("period") || "7d";
+  const cacheKey = `qweather_forecast:${lon}:${lat}:${period}:${lang}:${unit}`;
   const cacheTtl = QWEATHER_CACHE_TTL.FORECAST;
   return getResponseData(
     env,
@@ -75,30 +76,10 @@ const handleWeatherForecastQuery = async (
     cacheTtl,
     () =>
       fetch(
-        `${QWEATHER_BASE_URL}/v7/weather/${query}?location=${lon},${lat}&key=${env.QWEATHER_KEY}&lang=${lang}&unit=${unit}`,
+        `${QWEATHER_BASE_URL}/v7/weather/${period}?location=${lon},${lat}&key=${env.QWEATHER_KEY}&lang=${lang}&unit=${unit}`,
       ),
     origin,
   );
-};
-
-export const handleWeatherDayQuery = async (
-  request: Request,
-  env: Env,
-  origin: string,
-) => {
-  const url = new URL(request.url);
-  const day = url.searchParams.get("day") || "7d";
-  handleWeatherForecastQuery(request, env, origin, day);
-};
-
-export const handleWeatherHourQuery = async (
-  request: Request,
-  env: Env,
-  origin: string,
-) => {
-  const url = new URL(request.url);
-  const hour = url.searchParams.get("hour") || "24h";
-  handleWeatherForecastQuery(request, env, origin, hour);
 };
 
 export const handleWeatherIndiceQuery = async (
