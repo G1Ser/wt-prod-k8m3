@@ -1,5 +1,5 @@
 import swaggerJsdoc from "swagger-jsdoc";
-import { writeFileSync, mkdirSync } from "fs";
+import { writeFileSync, mkdirSync, copyFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
@@ -43,6 +43,7 @@ const spec = swaggerJsdoc(options);
 // 生成本地预览用的静态 HTML（spec 内嵌，直接用浏览器打开）
 const docsDir = join(__dirname, "../docs");
 mkdirSync(docsDir, { recursive: true });
+copyFileSync(join(__dirname, "../public/favicon.ico"), join(docsDir, "favicon.ico"));
 
 const htmlOutput = `<!doctype html>
 <html>
@@ -50,6 +51,7 @@ const htmlOutput = `<!doctype html>
     <title>天气 API 文档</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="./favicon.ico" />
   </head>
   <body>
     <script id="api-reference" type="application/json">
