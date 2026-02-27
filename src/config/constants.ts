@@ -8,5 +8,6 @@ const CORS_ORIGINS = [
   "https://weatherv2.chauncey.work",
   "https://weatherv3.chauncey.work",
   "https://weatherv4.chauncey.work",
+  "https://weather-api.chauncey.work",
 ];
 export { MINUTE, HOUR, DAY, CORS_ORIGINS };
