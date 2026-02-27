@@ -1,23 +1,13 @@
 {
   "name": "wt-prod-k8m3",
   "version": "1.0.0",
-  "description": "天气项目后端代码",
-  "main": "src/index.ts",
+  "description": "天气项目 API 文档生成",
   "type": "module",
-  "keywords": [
-    "weather",
-    "backend",
-    "nodejs",
-    "typescript",
-    "cloudflare"
-  ],
   "author": "chauncey",
   "scripts": {
-    "build": "tsc"
+    "swagger": "node scripts/generate-swagger.mjs"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20251121.0",
-    "typescript": "^5.9.3",
-    "wrangler": "^4.50.0"
+    "swagger-jsdoc": "^6.2.8"
   }
 }

@@ -1,7 +1,0 @@
-name = "wt-prod-k8m3"
-main = "src/index.ts"
-compatibility_date = "2025-11-22"
-
-[[kv_namespaces]]
-binding = "CACHE"
-id = "1de6a49d67c249e4bb11b528d32b2be1"
