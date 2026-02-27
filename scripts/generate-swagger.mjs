@@ -16,7 +16,7 @@ const options = {
     },
     servers: [
       {
-        url: "https://wt-prod-k8m3.chauncey.workers.dev",
+        url: "https://wt-prod-k8m3.chauncey.work",
         description: "生产环境",
       },
     ],
