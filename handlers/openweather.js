@@ -2,7 +2,7 @@
  * @openapi
  * components:
  *   parameters:
- *     OWLon:
+ *     Lon:
  *       in: query
  *       name: lon
  *       required: true
@@ -10,7 +10,7 @@
  *         type: string
  *         example: "116.404"
  *       description: 经度
- *     OWLat:
+ *     Lat:
  *       in: query
  *       name: lat
  *       required: true
@@ -18,7 +18,7 @@
  *         type: string
  *         example: "39.915"
  *       description: 纬度
- *     OWLang:
+ *     Lang:
  *       in: query
  *       name: lang
  *       schema:
@@ -26,7 +26,7 @@
  *         default: zh_cn
  *         example: zh_cn
  *       description: 返回语言（zh_cn / en / ...）
- *     OWUnits:
+ *     Units:
  *       in: query
  *       name: units
  *       schema:
@@ -43,10 +43,10 @@
  *     summary: OpenWeather 当前天气
  *     tags: [OpenWeather]
  *     parameters:
- *       - $ref: '#/components/parameters/OWLon'
- *       - $ref: '#/components/parameters/OWLat'
- *       - $ref: '#/components/parameters/OWLang'
- *       - $ref: '#/components/parameters/OWUnits'
+ *       - $ref: '#/components/parameters/Lon'
+ *       - $ref: '#/components/parameters/Lat'
+ *       - $ref: '#/components/parameters/Lang'
+ *       - $ref: '#/components/parameters/Units'
  *     responses:
  *       200:
  *         description: 成功返回当前天气数据
@@ -63,10 +63,10 @@
  *     summary: OpenWeather 5 天 / 3 小时天气预报
  *     tags: [OpenWeather]
  *     parameters:
- *       - $ref: '#/components/parameters/OWLon'
- *       - $ref: '#/components/parameters/OWLat'
- *       - $ref: '#/components/parameters/OWLang'
- *       - $ref: '#/components/parameters/OWUnits'
+ *       - $ref: '#/components/parameters/Lon'
+ *       - $ref: '#/components/parameters/Lat'
+ *       - $ref: '#/components/parameters/Lang'
+ *       - $ref: '#/components/parameters/Units'
  *     responses:
  *       200:
  *         description: 成功返回预报数据（每 3 小时一条）
@@ -83,8 +83,8 @@
  *     summary: OpenWeather 空气污染数据
  *     tags: [OpenWeather]
  *     parameters:
- *       - $ref: '#/components/parameters/OWLon'
- *       - $ref: '#/components/parameters/OWLat'
+ *       - $ref: '#/components/parameters/Lon'
+ *       - $ref: '#/components/parameters/Lat'
  *     responses:
  *       200:
  *         description: 成功返回空气质量指数（AQI、CO、NO2、PM2.5 等）

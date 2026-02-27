@@ -22,15 +22,16 @@ const options = {
     ],
     tags: [
       { name: "IP", description: "IP 地理定位" },
-      { name: "高德地图", description: "高德地图 API（地理编码、天气）" },
-      { name: "百度地图", description: "百度地图 API（天气）" },
+      { name: "Amap", description: "高德地图 API（地理编码、国内天气）" },
+      { name: "Bmap", description: "百度地图 API（全国天气）" },
       {
-        name: "和风天气",
-        description: "和风天气 API（实况、预报、指数、天文、预警、空气质量）",
+        name: "QWeather",
+        description:
+          "和风天气 API（全国实况、预报、指数、天文、预警、空气质量）",
       },
       {
         name: "OpenWeather",
-        description: "OpenWeather API（天气、预报、空气质量、地图瓦片）",
+        description: "OpenWeather API（全国天气、预报、空气质量、地图瓦片）",
       },
     ],
   },

@@ -2,7 +2,7 @@
  * @openapi
  * components:
  *   parameters:
- *     QWeatherLon:
+ *     Lon:
  *       in: query
  *       name: lon
  *       required: true
@@ -10,7 +10,7 @@
  *         type: string
  *         example: "116.404"
  *       description: 经度
- *     QWeatherLat:
+ *     Lat:
  *       in: query
  *       name: lat
  *       required: true
@@ -18,7 +18,7 @@
  *         type: string
  *         example: "39.915"
  *       description: 纬度
- *     QWeatherLang:
+ *     Lang:
  *       in: query
  *       name: lang
  *       schema:
@@ -26,7 +26,7 @@
  *         default: zh
  *         example: zh
  *       description: 返回语言（zh / en）
- *     QWeatherUnit:
+ *     Unit:
  *       in: query
  *       name: unit
  *       schema:
@@ -41,12 +41,12 @@
  * /qweather/now:
  *   get:
  *     summary: 和风天气实况
- *     tags: [和风天气]
+ *     tags: [QWeather]
  *     parameters:
- *       - $ref: '#/components/parameters/QWeatherLon'
- *       - $ref: '#/components/parameters/QWeatherLat'
- *       - $ref: '#/components/parameters/QWeatherLang'
- *       - $ref: '#/components/parameters/QWeatherUnit'
+ *       - $ref: '#/components/parameters/Lon'
+ *       - $ref: '#/components/parameters/Lat'
+ *       - $ref: '#/components/parameters/Lang'
+ *       - $ref: '#/components/parameters/Unit'
  *     responses:
  *       200:
  *         description: 成功返回实时天气数据
@@ -60,13 +60,13 @@
  * @openapi
  * /qweather/forecast:
  *   get:
- *     summary: 和风天气逐日预报
- *     tags: [和风天气]
+ *     summary: 和风天气预报
+ *     tags: [QWeather]
  *     parameters:
- *       - $ref: '#/components/parameters/QWeatherLon'
- *       - $ref: '#/components/parameters/QWeatherLat'
- *       - $ref: '#/components/parameters/QWeatherLang'
- *       - $ref: '#/components/parameters/QWeatherUnit'
+ *       - $ref: '#/components/parameters/Lon'
+ *       - $ref: '#/components/parameters/Lat'
+ *       - $ref: '#/components/parameters/Lang'
+ *       - $ref: '#/components/parameters/Unit'
  *       - in: query
  *         name: period
  *         schema:
@@ -88,11 +88,11 @@
  * /qweather/indice:
  *   get:
  *     summary: 和风天气生活指数
- *     tags: [和风天气]
+ *     tags: [QWeather]
  *     parameters:
- *       - $ref: '#/components/parameters/QWeatherLon'
- *       - $ref: '#/components/parameters/QWeatherLat'
- *       - $ref: '#/components/parameters/QWeatherLang'
+ *       - $ref: '#/components/parameters/Lon'
+ *       - $ref: '#/components/parameters/Lat'
+ *       - $ref: '#/components/parameters/Lang'
  *     responses:
  *       200:
  *         description: 成功返回生活指数（运动、洗车、穿衣等）
@@ -106,11 +106,11 @@
  * @openapi
  * /qweather/astronomy:
  *   get:
- *     summary: 和风天气天文数据（日出日落 / 月出月落）
- *     tags: [和风天气]
+ *     summary: 和风天气天文数据（日出日落 / 月相）
+ *     tags: [QWeather]
  *     parameters:
- *       - $ref: '#/components/parameters/QWeatherLon'
- *       - $ref: '#/components/parameters/QWeatherLat'
+ *       - $ref: '#/components/parameters/Lon'
+ *       - $ref: '#/components/parameters/Lat'
  *       - in: query
  *         name: astronomy
  *         required: true
@@ -118,7 +118,7 @@
  *           type: string
  *           enum: [sun, moon]
  *           example: sun
- *         description: 天文类型，sun=日出日落，moon=月出月落
+ *         description: 天文类型，sun=日出日落，moon=月相
  *       - in: query
  *         name: date
  *         required: true
@@ -140,11 +140,11 @@
  * /qweather/alert:
  *   get:
  *     summary: 和风天气灾害预警
- *     tags: [和风天气]
+ *     tags: [QWeather]
  *     parameters:
- *       - $ref: '#/components/parameters/QWeatherLon'
- *       - $ref: '#/components/parameters/QWeatherLat'
- *       - $ref: '#/components/parameters/QWeatherLang'
+ *       - $ref: '#/components/parameters/Lon'
+ *       - $ref: '#/components/parameters/Lat'
+ *       - $ref: '#/components/parameters/Lang'
  *     responses:
  *       200:
  *         description: 成功返回灾害预警信息
@@ -159,11 +159,11 @@
  * /qweather/air:
  *   get:
  *     summary: 和风天气空气质量
- *     tags: [和风天气]
+ *     tags: [QWeather]
  *     parameters:
- *       - $ref: '#/components/parameters/QWeatherLon'
- *       - $ref: '#/components/parameters/QWeatherLat'
- *       - $ref: '#/components/parameters/QWeatherLang'
+ *       - $ref: '#/components/parameters/Lon'
+ *       - $ref: '#/components/parameters/Lat'
+ *       - $ref: '#/components/parameters/Lang'
  *     responses:
  *       200:
  *         description: 成功返回空气质量数据（AQI、PM2.5 等）

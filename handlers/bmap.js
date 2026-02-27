@@ -3,7 +3,7 @@
  * /bmap/weather:
  *   get:
  *     summary: 百度地图天气查询
- *     tags: [百度地图]
+ *     tags: [Bmap]
  *     parameters:
  *       - in: query
  *         name: lon

@@ -2,19 +2,19 @@
  * @openapi
  * /amap/geocode:
  *   get:
- *     summary: 高德地图地理编码（地址转经纬度）
- *     tags: [高德地图]
+ *     summary: 高德地图地理编码
+ *     tags: [Amap]
  *     parameters:
  *       - in: query
  *         name: address
  *         required: true
  *         schema:
  *           type: string
- *           example: 北京市朝阳区阜通东大街6号
- *         description: 待解析的地址字符串
+ *           example: 北京市
+ *         description: 待解析的地址
  *     responses:
  *       200:
- *         description: 成功返回经纬度坐标
+ *         description: 成功返回地理编码
  *       403:
  *         description: 请求来源不在白名单
  */
@@ -24,7 +24,7 @@
  * /amap/weather:
  *   get:
  *     summary: 高德地图天气查询
- *     tags: [高德地图]
+ *     tags: [Amap]
  *     parameters:
  *       - in: query
  *         name: city
