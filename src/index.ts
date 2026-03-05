@@ -29,7 +29,7 @@ export default {
     } catch (error) {
       return createErrorResponse(
         "Internal Server Error",
-        "An error occurred",
+        error instanceof Error ? error.message : String(error),
         500
       );
     }
