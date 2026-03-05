@@ -6,8 +6,8 @@ const GoogleMap_ROUTES_MAP = {
 };
 const GoogleMap_CACHE_TTL = {
   GEOCODE: {
-    kv: 365 * 100 * DAY,
-    browser: 365 * 50 * DAY,
+    kv: 365 * 68 * DAY,
+    browser: 365 * 34 * DAY,
   },
 };
 export { GoogleMap_BASE_URL, GoogleMap_ROUTES_MAP, GoogleMap_CACHE_TTL };
