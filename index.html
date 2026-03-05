@@ -27,6 +27,10 @@
       "description": "IP 地理定位"
     },
     {
+      "name": "GoogleMap",
+      "description": "Google Map API（地理编码））"
+    },
+    {
       "name": "Amap",
       "description": "高德地图 API（地理编码、国内天气）"
     },
@@ -139,16 +143,6 @@
               "example": "39.915"
             },
             "description": "纬度"
-          },
-          {
-            "in": "query",
-            "name": "country",
-            "schema": {
-              "type": "string",
-              "default": "CN",
-              "example": "CN"
-            },
-            "description": "国家代码，CN=中国（使用国内接口），其他=海外接口"
           }
         ],
         "responses": {
