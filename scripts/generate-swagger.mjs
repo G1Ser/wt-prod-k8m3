@@ -22,6 +22,10 @@ const options = {
     ],
     tags: [
       { name: "IP", description: "IP 地理定位" },
+      {
+        name: "GoogleMap",
+        description: "Google Map API（地理编码））",
+      },
       { name: "Amap", description: "高德地图 API（地理编码、国内天气）" },
       { name: "Bmap", description: "百度地图 API（全国天气）" },
       {
@@ -43,7 +47,10 @@ const spec = swaggerJsdoc(options);
 // 生成本地预览用的静态 HTML（spec 内嵌，直接用浏览器打开）
 const docsDir = join(__dirname, "../docs");
 mkdirSync(docsDir, { recursive: true });
-copyFileSync(join(__dirname, "../public/favicon.ico"), join(docsDir, "favicon.ico"));
+copyFileSync(
+  join(__dirname, "../public/favicon.ico"),
+  join(docsDir, "favicon.ico"),
+);
 
 const htmlOutput = `<!doctype html>
 <html>

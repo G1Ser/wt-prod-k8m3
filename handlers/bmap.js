@@ -19,13 +19,6 @@
  *           type: string
  *           example: "39.915"
  *         description: 纬度
- *       - in: query
- *         name: country
- *         schema:
- *           type: string
- *           default: CN
- *           example: CN
- *         description: 国家代码，CN=中国（使用国内接口），其他=海外接口
  *     responses:
  *       200:
  *         description: 成功返回天气数据
