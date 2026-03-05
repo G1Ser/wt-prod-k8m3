@@ -7,8 +7,8 @@ const AMAP_ROUTES_MAP = {
 };
 const AMAP_CACHE_TTL = {
   GEOCODE: {
-    kv: 30 * DAY,
-    browser: 1 * DAY,
+    kv: 365 * 100 * DAY,
+    browser: 365 * 50 * DAY,
   },
   WEATHER: {
     kv: 60 * MINUTE,
