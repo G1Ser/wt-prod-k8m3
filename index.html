@@ -31,10 +31,6 @@
       "description": "地理编码"
     },
     {
-      "name": "GoogleMap",
-      "description": "Google Map API（地理编码））"
-    },
-    {
       "name": "Amap",
       "description": "高德地图 API（地理编码、国内天气）"
     },
@@ -52,34 +48,6 @@
     }
   ],
   "paths": {
-    "/amap/geocode": {
-      "get": {
-        "summary": "高德地图地理编码",
-        "tags": [
-          "Amap"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "address",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "北京市"
-            },
-            "description": "待解析的地址"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "成功返回地理编码"
-          },
-          "403": {
-            "description": "请求来源不在白名单"
-          }
-        }
-      }
-    },
     "/amap/weather": {
       "get": {
         "summary": "高德地图天气查询",
@@ -193,83 +161,11 @@
         }
       }
     },
-    "/googlemap/geocode": {
-      "get": {
-        "summary": "Google Map 地理编码查询",
-        "tags": [
-          "GoogleMap"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "address",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "北京市"
-            },
-            "description": "需要查询的地址"
-          },
-          {
-            "in": "query",
-            "name": "lang",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "zh-CN"
-              ],
-              "default": "zh-CN"
-            },
-            "description": "需要返回的语言"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "成功返回地理编码数据"
-          },
-          "400": {
-            "description": "缺少必要参数"
-          },
-          "403": {
-            "description": "请求来源不在白名单"
-          }
-        }
-      }
-    },
     "/ip": {
       "get": {
         "summary": "获取客户端 IP 地理定位信息",
         "tags": [
           "IP"
-        ],
-        "responses": {
-          "200": {
-            "description": "成功返回 IP 定位数据"
-          },
-          "403": {
-            "description": "请求来源不在白名单"
-          }
-        }
-      }
-    },
-    "/ip2": {
-      "get": {
-        "summary": "获取客户端 IP 地理定位信息",
-        "tags": [
-          "IP"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "lang",
-            "schema": {
-              "type": "string",
-              "default": "zh-CN",
-              "example": "zh-CN"
-            },
-            "description": "返回数据的语言（zh-CN / en）"
-          }
         ],
         "responses": {
           "200": {
