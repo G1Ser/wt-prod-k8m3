@@ -1,6 +1,6 @@
 /**
  * @openapi
- * /divisions/search:
+ * /geo/search:
  *   get:
  *     summary: 地址位置搜索
  *     tags: [Geo]
