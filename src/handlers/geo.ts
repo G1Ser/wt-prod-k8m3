@@ -1,7 +1,7 @@
 import { neon } from "@neondatabase/serverless";
 import { Env } from "@/types/env";
-import { DIVISIONS_CACHE_CONFIG } from "@/config/providers/divisions";
-import type { GeoLocation } from "@/types/divisions";
+import { GEO_CACHE_CONFIG } from "@/config/providers/geo";
+import type { GeoLocation } from "@/types/geo";
 import { createErrorResponse, createSuccessResponse } from "@/utils/response";
 import { getCORSHeaders } from "@/utils/cors";
 
@@ -142,7 +142,7 @@ const searchDivisions = async (sql: Sql, keyword: string) => {
   return [];
 };
 
-export const handleDivisionsSearch = async (
+export const handleGeoSearch = async (
   request: Request,
   env: Env,
   origin: string,
@@ -163,7 +163,7 @@ export const handleDivisionsSearch = async (
     return createSuccessResponse(cached, {
       ...getCORSHeaders(origin),
       "X-Cache": "HIT",
-      "Cache-Control": `public, max-age=${DIVISIONS_CACHE_CONFIG.search.browser}`,
+      "Cache-Control": `public, max-age=${GEO_CACHE_CONFIG.search.browser}`,
     });
   }
 
@@ -172,12 +172,12 @@ export const handleDivisionsSearch = async (
   const json = JSON.stringify({ results });
 
   await env.CACHE.put(cacheKey, json, {
-    expirationTtl: DIVISIONS_CACHE_CONFIG.search.kv,
+    expirationTtl: GEO_CACHE_CONFIG.search.kv,
   });
 
   return createSuccessResponse(json, {
     ...getCORSHeaders(origin),
     "X-Cache": "MISS",
-    "Cache-Control": `public, max-age=${DIVISIONS_CACHE_CONFIG.search.browser}`,
+    "Cache-Control": `public, max-age=${GEO_CACHE_CONFIG.search.browser}`,
   });
 };
