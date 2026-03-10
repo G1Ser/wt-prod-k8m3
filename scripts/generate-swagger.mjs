@@ -22,6 +22,7 @@ const options = {
     ],
     tags: [
       { name: "IP", description: "IP 地理定位" },
+      { name: "Geo", description: "地理编码" },
       {
         name: "GoogleMap",
         description: "Google Map API（地理编码））",
