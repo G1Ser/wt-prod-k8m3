@@ -2,6 +2,7 @@ import { Env } from "@/types/env";
 import { AMAP_BASE_URL, AMAP_CACHE_TTL } from "@/config/providers/amap";
 import { createErrorResponse } from "@/utils/response";
 import { getResponseData } from "@/utils/cache";
+// deprecated, will be removed in the future
 export const handleGeocodeQuery = async (
   request: Request,
   env: Env,
