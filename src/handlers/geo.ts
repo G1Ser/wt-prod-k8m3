@@ -157,7 +157,7 @@ export const handleGeoSearch = async (
     );
   }
 
-  const cacheKey = `divisions_search:${keyword.toLowerCase()}`;
+  const cacheKey = `geo_search:${keyword.toLowerCase()}`;
   const cached = await env.CACHE.get(cacheKey);
   if (cached) {
     return createSuccessResponse(cached, {
