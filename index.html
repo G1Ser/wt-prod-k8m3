@@ -138,14 +138,7 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "keyword",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "北京"
-            },
-            "description": "查询的地址关键词，支持模糊搜索"
+            "$ref": "#/components/parameters/Keyword"
           }
         ],
         "responses": {
@@ -169,14 +162,7 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "keyword",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "北京"
-            },
-            "description": "查询的地址关键词，支持模糊搜索"
+            "$ref": "#/components/parameters/Keyword"
           }
         ],
         "responses": {
@@ -623,6 +609,16 @@
   },
   "components": {
     "parameters": {
+      "Keyword": {
+        "in": "query",
+        "name": "keyword",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "北京"
+        },
+        "description": "查询的地址关键词，支持模糊搜索"
+      },
       "Lon": {
         "in": "query",
         "name": "lon",
