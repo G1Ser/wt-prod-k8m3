@@ -10,4 +10,6 @@ const CORS_ORIGINS = [
   "https://weatherv4.chauncey.work",
   "https://weather-api.chauncey.work",
 ];
-export { MINUTE, HOUR, DAY, CORS_ORIGINS };
+// n8n 接口网址
+const N8N_BASE_URL = "https://n8n.chauncey.work/webhook";
+export { MINUTE, HOUR, DAY, CORS_ORIGINS, N8N_BASE_URL };

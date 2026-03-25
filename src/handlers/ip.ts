@@ -1,27 +1,48 @@
+﻿import { IP_CACHE_TTL } from "@/config/providers/ip";
+import { getCORSHeaders } from "@/utils/cors";
+import { createSuccessResponse } from "@/utils/response";
+import { type Sql, getDbClient } from "@/utils/neon";
 import type { Env } from "@/types/env";
-import { IP_BASE_URL, IP_CACHE_TTL } from "@/config/providers/ip";
-import { getResponseData } from "@/utils/cache";
-import { createErrorResponse } from "@/utils/response";
+import type { IPLocation } from "@/types/geo";
+
+const findDivisionByPoint = async (sql: Sql, lon: number, lat: number) => {
+  return (await sql`
+    SELECT id, name, name_zh, adcode, lon, lat
+    FROM geo_divisions
+    WHERE ST_Intersects(
+      geom,
+      ST_SetSRID(ST_MakePoint(${lon}, ${lat}), 4326)
+    )
+    ORDER BY importance DESC
+    LIMIT 1
+  `) as IPLocation[];
+};
 
 export const handleIPQuery = async (
   request: Request,
   env: Env,
   origin: string,
 ) => {
-  if (!env.IP_KEY) {
-    return createErrorResponse("Configuration Error", "IP_KEY is not set");
-  }
-  const real_ip =
-    request.headers.get("CF-Connecting-IP") ||
-    request.headers.get("X-Forwarded-For") ||
-    "";
-  const cacheKey = `ip:${real_ip}`;
-  const cacheTtl = IP_CACHE_TTL.IP;
-  return getResponseData(
-    env,
-    cacheKey,
-    cacheTtl,
-    () => fetch(`${IP_BASE_URL}?apiKey=${env.IP_KEY}&ip=${real_ip}`),
-    origin,
-  );
+  const url = new URL(request.url);
+  const cf = request.cf;
+  const latitude = cf?.latitude;
+  const longitude = cf?.longitude;
+  const lat = Number(url.searchParams.get("lat") || latitude);
+  const lon = Number(url.searchParams.get("lon") || longitude);
+
+  const sql = getDbClient(env);
+  const rows = await findDivisionByPoint(sql, lon, lat);
+  const result = rows[0] ?? {
+    id: 205591541,
+    name: "Tongzhou District",
+    name_zh: "通州区",
+    adcode: "110112",
+    lon: 116.6516918,
+    lat: 39.9069176,
+  };
+
+  return createSuccessResponse(JSON.stringify(result), {
+    ...getCORSHeaders(origin),
+    "Cache-Control": `public, max-age=${IP_CACHE_TTL.IP.browser}`,
+  });
 };
