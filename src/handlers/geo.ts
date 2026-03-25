@@ -218,7 +218,7 @@ export const handleCoordinateSearch = async (
   let results;
   results = await searchDivisions(sql, keyword);
   if (results.length > 0) {
-    const json = JSON.stringify({ results });
+    const json = JSON.stringify({ status: 200, data: results });
 
     await env.CACHE.put(cacheKey, json, {
       expirationTtl: cacheTtl.kv,
