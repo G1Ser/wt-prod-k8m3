@@ -9,15 +9,15 @@
  *         name: lon
  *         required: true
  *         schema:
- *           type: string
- *           example: "116.404"
+ *           type: number
+ *           example: 116.404
  *         description: 经度
  *       - in: query
  *         name: lat
  *         required: true
  *         schema:
- *           type: string
- *           example: "39.915"
+ *           type: number
+ *           example: 39.915
  *         description: 纬度
  *     responses:
  *       200:

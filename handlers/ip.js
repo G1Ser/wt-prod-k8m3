@@ -8,14 +8,14 @@
  *       - in: query
  *         name: lon
  *         schema:
- *           type: string
- *           example: "116.6517"
+ *           type: number
+ *           example: 116.6517
  *         description: 查询的经度
  *       - in: query
  *         name: lat
  *         schema:
- *           type: string
- *           example: "39.9069"
+ *           type: number
+ *           example: 39.9069
  *         description: 查询的维度
  *     responses:
  *       200:
