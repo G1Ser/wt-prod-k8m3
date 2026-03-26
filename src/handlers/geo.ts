@@ -234,7 +234,12 @@ export const handleCoordinateSearch = async (
     env,
     cacheKey,
     cacheTtl,
-    () => fetch(`${N8N_BASE_URL}/geo/search?q=${keyword}`),
+    () =>
+      fetch(`${N8N_BASE_URL}/geo/search?q=${keyword}`, {
+        headers: {
+          "X-Webhook-Token": env["X-Webhook-Token"],
+        },
+      }),
     origin,
   );
 };

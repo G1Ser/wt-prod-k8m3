@@ -11,6 +11,8 @@ export interface Env {
   OPENWEATHER_KEY: string;
   // Neon 数据库连接字符串
   NEON_DB_URL: string;
+  // 认证Token
+  "X-Webhook-Token": string;
   // Cloudflare KV 存储
   CACHE: KVNamespace;
 }
